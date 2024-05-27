@@ -76,6 +76,13 @@ classDiagram
             +String() string
             +Update(request DeclaredDataUpdateRequest, requestedOn time.Time) (changelog.Changelog, error)
         }
+        class UserDeclaredDataRepository {
+            <<interface>>
+            +FindByID(id int64) (UserDeclaredData, error)
+            +FindByPhone(phone Phone) ([]UserDeclaredData, error)
+            +Save(user UserDeclaredData) error
+            +SaveAll(users []UserDeclaredData) error
+        }
         class DeclaredDataUpdateRequest {
             -nickname    *Nickname
             -phone       *Phone
@@ -106,4 +113,11 @@ classDiagram
             +String() string
         }
     }
+    namespace shared {
+        class Clock {
+            <<interface>>
+            Now() time.Time
+        }
+    }
+
 ```
