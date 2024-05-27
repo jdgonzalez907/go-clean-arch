@@ -1,5 +1,25 @@
 # User declared data flow
 
+## Update declared data use case
+```
+graph TD
+    A[Start] --> B[Retrieve UserBase from API Repository]
+    B --> C[Retrieve UserNew from Vault Repository]
+    C --> D[Merge UserNew into UserBase]
+    D --> E[Save Merged UserBase to API Repository]
+    E --> F[Save Merged UserBase to Vault Repository]
+    F --> G[Get Current Time]
+    G --> H[Create DeclaredDataUpdateRequest]
+    H --> I[Update UserBase with Request]
+    I --> J[Save Changelog]
+    J --> K{Phone Changed?}
+    K -- No --> L[Return Success with Changelog]
+    K -- Yes --> M[Find Users by Phone in Vault Repository]
+    M --> N[Recycle Phone for Associated Users]
+    N --> O[Save All Recycled Users to Vault Repository]
+    O --> L[Return Success with Changelog]
+```
+
 ## Class diagram
 ```mermaid
 classDiagram
@@ -151,3 +171,4 @@ classDiagram
         }
     }
 ```
+
