@@ -1,6 +1,6 @@
 # User declared data flow
 
-## Update declared data use case
+## Update use case
 ```mermaid
 graph TD
     A[Start] --> B[Retrieve UserBase from API Users Repository]
