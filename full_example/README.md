@@ -13,6 +13,10 @@ classDiagram
     DeclaredDataUpdateRequest .. Nickname
     UserDeclaredData .. Phone
     DeclaredDataUpdateRequest .. Phone
+    UpdateDeclaredDataUseCase .. UserDeclaredDataRepository
+    UpdateDeclaredDataUseCase .. ChangelogRepository
+    UpdateDeclaredDataUseCase .. Clock
+    UpdateDeclaredDataUseCaseOutput .. Changelog
     namespace domain {
         class Integrator {
             -value string
@@ -56,6 +60,11 @@ classDiagram
             +Equals(other Field) bool
             +String() string
             +Value() string
+        }
+
+        class ChangelogRepository {
+            <<interface>>
+            +Save(changelog Changelog) error
         }
     }
     namespace declareddata {
@@ -119,5 +128,26 @@ classDiagram
             Now() time.Time
         }
     }
+    namespace usecases {
+        class UpdateDeclaredDataUseCase {
+            -vaultUserDeclaredDataRepository    declareddata.UserDeclaredDataRepository
+            -apiUsersUserDeclaredDataRepository declareddata.UserDeclaredDataRepository
+            -changelogRepository                changelog.ChangelogRepository
+            -clock                              shared.Clock
 
+            +Execute(input UpdateDeclaredDataUseCaseInput) (UpdateDeclaredDataUseCaseOutput, error)
+        }
+
+        class UpdateDeclaredDataUseCaseInput {
+            +UserID      int64
+            +Nickname    *string
+            +CountryCode *string
+            +PhoneNumber *string
+            +RequestedBy string
+        }
+
+        class UpdateDeclaredDataUseCaseOutput {
+            +Changelog changelog.Changelog
+        }
+    }
 ```
