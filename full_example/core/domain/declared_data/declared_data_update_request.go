@@ -10,11 +10,11 @@ import (
 type DeclaredDataUpdateRequest struct {
 	nickname    *Nickname
 	phone       *Phone
-	integrator  domain.Integrator
+	requestedBy domain.Integrator
 	requestedOn time.Time
 }
 
-func NewDeclaredDataUpdateRequest(nickname, country_code, phone_number *string, integrator string, requestedOn time.Time) (DeclaredDataUpdateRequest, error) {
+func NewDeclaredDataUpdateRequest(nickname, country_code, phone_number *string, requestedBy string, requestedOn time.Time) (DeclaredDataUpdateRequest, error) {
 	var newNickname *Nickname = nil
 	var newPhone *Phone = nil
 	var err error = nil
@@ -37,7 +37,7 @@ func NewDeclaredDataUpdateRequest(nickname, country_code, phone_number *string, 
 		newPhone = &phone
 	}
 
-	newIntegrator, err := domain.NewIntegrator(integrator)
+	newRequestedBy, err := domain.NewIntegrator(requestedBy)
 	if err != nil {
 		return DeclaredDataUpdateRequest{}, err
 	}
@@ -45,7 +45,7 @@ func NewDeclaredDataUpdateRequest(nickname, country_code, phone_number *string, 
 	return DeclaredDataUpdateRequest{
 		nickname:    newNickname,
 		phone:       newPhone,
-		integrator:  newIntegrator,
+		requestedBy: newRequestedBy,
 		requestedOn: requestedOn,
 	}, nil
 }
@@ -58,8 +58,8 @@ func (r DeclaredDataUpdateRequest) Phone() *Phone {
 	return r.phone
 }
 
-func (r DeclaredDataUpdateRequest) Integrator() domain.Integrator {
-	return r.integrator
+func (r DeclaredDataUpdateRequest) RequestedBy() domain.Integrator {
+	return r.requestedBy
 }
 
 func (r DeclaredDataUpdateRequest) RequestedOn() time.Time {
@@ -77,5 +77,5 @@ func (r DeclaredDataUpdateRequest) String() string {
 		phone = r.phone.String()
 	}
 
-	return fmt.Sprintf("DeclaredDataUpdateRequest{nickname: %s, phone: %s, integrator: %s, requestedOn: %s}", nickname, phone, r.integrator.String(), r.requestedOn)
+	return fmt.Sprintf("DeclaredDataUpdateRequest{nickname: %s, phone: %s, requestedBy: %s, requestedOn: %s}", nickname, phone, r.requestedBy.String(), r.requestedOn)
 }

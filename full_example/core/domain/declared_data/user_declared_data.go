@@ -88,7 +88,7 @@ func (u *UserDeclaredData) Update(request DeclaredDataUpdateRequest, requestedOn
 		return changelog.Changelog{}, domain.ErrDeclaredDataUpdateRequestMustHaveInfoToUpate
 	}
 
-	cl, err := changelog.NewChangelog(1, u.id, request.Integrator().Value(), requestedOn)
+	cl, err := changelog.NewChangelog(1, u.id, request.RequestedBy().Value(), requestedOn)
 	if err != nil {
 		return changelog.Changelog{}, err
 	}

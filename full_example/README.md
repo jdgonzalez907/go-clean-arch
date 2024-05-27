@@ -79,12 +79,12 @@ classDiagram
         class DeclaredDataUpdateRequest {
             -nickname    *Nickname
             -phone       *Phone
-            -integrator  domain.Integrator
+            -requestedBy  domain.Integrator
             -requestedOn time.Time
 
-            +Integrator() domain.Integrator
             +Nickname() *Nickname
             +Phone() *Phone
+            +RequestedBy() domain.Integrator
             +RequestedOn() time.Time
             +String() string
         }
