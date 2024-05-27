@@ -41,12 +41,12 @@ classDiagram
         class Changelog{
             -id         int64
             -userID     int64
-            -executedBy domain.Integrator
+            -executedBy shared.Integrator
             -occurredOn time.Time
             -logs       []Log
 
             +AddLog(log Log)
-            +ExecutedBy() domain.Integrator
+            +ExecutedBy() shared.Integrator
             +ID() int64
             +Logs() []Log
             +OccurredOn() time.Time
@@ -106,12 +106,12 @@ classDiagram
         class DeclaredDataUpdateRequest {
             -nickname    *Nickname
             -phone       *Phone
-            -requestedBy  domain.Integrator
+            -requestedBy  shared.Integrator
             -requestedOn time.Time
 
             +Nickname() *Nickname
             +Phone() *Phone
-            +RequestedBy() domain.Integrator
+            +RequestedBy() shared.Integrator
             +RequestedOn() time.Time
             +String() string
         }
