@@ -43,17 +43,17 @@ func (u *UpdateDeclaredDataUseCase) Execute(input UpdateDeclaredDataUseCaseInput
 	if err != nil {
 		return UpdateDeclaredDataUseCaseOutput{}, err
 	}
-	fmt.Println("UserBase: \n" + userBase.String())
+	fmt.Println("APIUser: \n" + userBase.String())
 
 	userNew, err := u.vaultUserDeclaredDataRepository.FindByID(input.UserID)
 	if err != nil {
 		return UpdateDeclaredDataUseCaseOutput{}, err
 	}
-	fmt.Println("UserNew: \n" + userNew.String())
+	fmt.Println("VaultUser: \n" + userNew.String())
 
 	userBase.Merge(userNew)
 	fmt.Println()
-	fmt.Println("Merge: \n" + userBase.String())
+	fmt.Println("MergedUser: \n" + userBase.String())
 
 	err = u.apiUsersUserDeclaredDataRepository.Save(userBase)
 	if err != nil {
