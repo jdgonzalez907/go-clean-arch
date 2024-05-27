@@ -3,10 +3,10 @@
 ## Update declared data use case
 ```mermaid
 graph TD
-    A[Start] --> B[Retrieve UserBase from API Repository]
+    A[Start] --> B[Retrieve UserBase from API Users Repository]
     B --> C[Retrieve UserNew from Vault Repository]
     C --> D[Merge UserNew into UserBase]
-    D --> E[Save Merged UserBase to API Repository]
+    D --> E[Save Merged UserBase to API Users Repository]
     E --> F[Save Merged UserBase to Vault Repository]
     F --> G[Get Current Time]
     G --> H[Create DeclaredDataUpdateRequest]
