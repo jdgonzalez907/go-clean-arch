@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jdgonzalez907/go-patterns/full_example/core/domain"
+	"github.com/jdgonzalez907/go-patterns/full_example/core/domain/shared"
 )
 
 type DeclaredDataUpdateRequest struct {
 	nickname    *Nickname
 	phone       *Phone
-	requestedBy domain.Integrator
+	requestedBy shared.Integrator
 	requestedOn time.Time
 }
 
@@ -37,7 +37,7 @@ func NewDeclaredDataUpdateRequest(nickname, country_code, phone_number *string, 
 		newPhone = &phone
 	}
 
-	newRequestedBy, err := domain.NewIntegrator(requestedBy)
+	newRequestedBy, err := shared.NewIntegrator(requestedBy)
 	if err != nil {
 		return DeclaredDataUpdateRequest{}, err
 	}
@@ -58,7 +58,7 @@ func (r DeclaredDataUpdateRequest) Phone() *Phone {
 	return r.phone
 }
 
-func (r DeclaredDataUpdateRequest) RequestedBy() domain.Integrator {
+func (r DeclaredDataUpdateRequest) RequestedBy() shared.Integrator {
 	return r.requestedBy
 }
 

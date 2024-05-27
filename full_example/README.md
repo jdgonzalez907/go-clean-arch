@@ -37,15 +37,6 @@ classDiagram
     UpdateDeclaredDataUseCase .. ChangelogRepository
     UpdateDeclaredDataUseCase .. Clock
     UpdateDeclaredDataUseCaseOutput .. Changelog
-    namespace domain {
-        class Integrator {
-            -value string
-
-            +Equals(other Integrator) bool
-            +String() string 
-            +Value() string
-        }
-    }
     namespace changelog {
         class Changelog{
             -id         int64
@@ -146,6 +137,13 @@ classDiagram
         class Clock {
             <<interface>>
             Now() time.Time
+        }
+        class Integrator {
+            -value string
+
+            +Equals(other Integrator) bool
+            +String() string 
+            +Value() string
         }
     }
     namespace usecases {

@@ -5,12 +5,13 @@ import (
 	"time"
 
 	"github.com/jdgonzalez907/go-patterns/full_example/core/domain"
+	"github.com/jdgonzalez907/go-patterns/full_example/core/domain/shared"
 )
 
 type Changelog struct {
 	id         int64
 	userID     int64
-	executedBy domain.Integrator
+	executedBy shared.Integrator
 	occurredOn time.Time
 	logs       []Log
 }
@@ -24,7 +25,7 @@ func NewChangelog(id, userID int64, executedBy string, occurredOn time.Time) (Ch
 		return Changelog{}, domain.ErrUserIDMustBePositive
 	}
 
-	newExecutedBy, err := domain.NewIntegrator(executedBy)
+	newExecutedBy, err := shared.NewIntegrator(executedBy)
 	if err != nil {
 		return Changelog{}, err
 	}
@@ -45,7 +46,7 @@ func (c *Changelog) UserID() int64 {
 	return c.userID
 }
 
-func (c *Changelog) ExecutedBy() domain.Integrator {
+func (c *Changelog) ExecutedBy() shared.Integrator {
 	return c.executedBy
 }
 

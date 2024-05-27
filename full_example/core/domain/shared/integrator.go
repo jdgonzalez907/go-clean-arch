@@ -1,8 +1,10 @@
-package domain
+package shared
 
 import (
 	"fmt"
 	"regexp"
+
+	"github.com/jdgonzalez907/go-patterns/full_example/core/domain"
 )
 
 type Integrator struct {
@@ -15,7 +17,7 @@ const (
 
 func NewIntegrator(value string) (Integrator, error) {
 	if value == "" {
-		return Integrator{}, ErrEmptyIntegrator
+		return Integrator{}, domain.ErrEmptyIntegrator
 	}
 
 	integratorRegexCompiled, err := regexp.Compile(integratorRegex)
@@ -24,7 +26,7 @@ func NewIntegrator(value string) (Integrator, error) {
 	}
 
 	if !integratorRegexCompiled.MatchString(value) {
-		return Integrator{}, ErrInvalidIntegrator
+		return Integrator{}, domain.ErrInvalidIntegrator
 	}
 
 	return Integrator{value: value}, nil
